@@ -8,6 +8,7 @@ plt.style.use("dark_background")
 
 def main():
     train_data, train_labels, test_data, test_labels = load_dataset(flatten=True)
+    print(train_data.shape[1])
     network = [
         Dense(train_data.shape[1], 100),
         ReLU(),
@@ -41,9 +42,9 @@ def main():
         plt.draw()
         plt.pause(0.001)
 
-    np.save("../data/weights/0.npy", network[0].weights)
-    np.save("../data/weights/2.npy", network[2].weights)
-    np.save("../data/weights/4.npy", network[4].weights)
+    np.save("../weights/0.npy", network[0].weights)
+    np.save("../weights/2.npy", network[2].weights)
+    np.save("../weights/4.npy", network[4].weights)
     plt.show()
 
 

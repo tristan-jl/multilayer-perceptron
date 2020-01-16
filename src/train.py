@@ -1,7 +1,8 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+
 from Network.Layers import Dense, ReLU
-from Network.utils import load_dataset, plot_sample, iterate_minibatches, predict, train
+from Network.utils import load_dataset, iterate_minibatches, predict, train
 
 plt.style.use("dark_background")
 
@@ -16,9 +17,6 @@ def main():
         ReLU(),
         Dense(200, 10),
     ]
-
-    # plot_sample(train_data, train_labels)
-    # print(test_labels)
 
     train_log = []
     val_log = []

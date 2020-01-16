@@ -1,21 +1,24 @@
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from Network.Layers import Dense, ReLU
 from Network.utils import load_dataset, plot_sample, iterate_minibatches, predict, train
 
 train_data, train_labels, test_data, test_labels = load_dataset(flatten=True)
-network = [
-        Dense(train_data.shape[1], 100),
-        ReLU(),
-        Dense(100, 200),
-        ReLU(),
-        Dense(200, 10),
-    ]
 
-network[0].weights = np.load("../weights/0.npy")
-network[2].weights = np.load("../weights/2.npy")
-network[4].weights = np.load("../weights/4.npy")
 
+def load_network():
+    try:
+        file_name = "../dist/network_file.p"
+        with open(file_name, 'rb') as pickled:
+            data = pickle.load(pickled)
+            network = data['network']
+        return network
+    except FileNotFoundError:
+        raise Exception("Could not find model file")
+
+
+network = load_network()
 
 data = test_data
 labels = test_labels

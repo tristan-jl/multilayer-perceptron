@@ -1,3 +1,5 @@
+import pickle
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,7 +11,6 @@ plt.style.use("dark_background")
 
 def main():
     train_data, train_labels, test_data, test_labels = load_dataset(flatten=True)
-    print(train_data.shape[1])
     network = [
         Dense(train_data.shape[1], 100),
         ReLU(),
@@ -36,13 +37,10 @@ def main():
 
         plt.plot(train_log, label="train accuracy")
         plt.plot(val_log, label="val accuracy")
-        # plt.legend(loc="best")
         plt.draw()
         plt.pause(0.001)
 
-    np.save("../weights/0.npy", network[0].weights)
-    np.save("../weights/2.npy", network[2].weights)
-    np.save("../weights/4.npy", network[4].weights)
+    pickle.dump({"network": network}, open("../dist/network_file" + ".p", "wb"))
     plt.show()
 
 

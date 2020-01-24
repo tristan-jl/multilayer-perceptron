@@ -1,8 +1,8 @@
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
-from Network.Layers import Dense, ReLU
-from Network.utils import load_dataset, plot_sample, iterate_minibatches, predict, train
+from Network.layers import Dense, ReLU
+from Network.utils import load_dataset
 
 train_data, train_labels, test_data, test_labels = load_dataset(flatten=True)
 
@@ -32,9 +32,10 @@ predictions = np.zeros(labels.shape)
 plt.figure(figsize=[6, 6])
 for i in range(9):
     plt.subplot(3, 3, i + 1)
-    plt.title(f"Label: {labels[i]}, Prediction: {predict(network, data[i])}")
+    plt.title(f"Label: {labels[i]}, Prediction: {network.predict(data[i])}")
     plt.imshow(data[i].reshape([28, 28]), cmap="gray")
 
 plt.tight_layout()
 plt.show()
 
+np.save("a", data[0])
